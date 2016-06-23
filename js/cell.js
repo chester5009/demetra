@@ -18,6 +18,7 @@ Cell.prototype.init = function() {
 	else if(this.element==1)this.color=0x3BB333;
 	else if(this.element==2)this.color=0x4274D0;
 	else if(this.element==3)this.color=0x87898E;
+	else if(this.element==-1)this.color=null;
 	this.graphics=new PIXI.Graphics();
 	this.graphics.beginFill(this.color);
 	this.graphics.lineStyle(2,0xFFFFFF);
@@ -27,4 +28,16 @@ Cell.prototype.init = function() {
 Cell.prototype.getGraphics = function() {
 	
 	return this.graphics;
+};
+Cell.prototype.setColor = function(element) {
+	if(this.element==0) this.color=0x95810F;
+	else if(this.element==1)this.color=0x3BB333;
+	else if(this.element==2)this.color=0x4274D0;
+	else if(this.element==3)this.color=0x87898E;
+	else if(this.element==-1)this.color=null;
+	
+	this.graphics=new PIXI.Graphics();
+	this.graphics.beginFill(this.color);
+	this.graphics.lineStyle(2,0xFFFFFF);
+	this.graphics.drawRect(this.rectangle.x,this.rectangle.y,this.rectangle.w,this.rectangle.h);
 };
