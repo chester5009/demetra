@@ -1,6 +1,15 @@
+
+var el={
+	0:"Earth",
+	1:"Wood",
+	2:"Water",
+	3:"Mountains"
+}
+
 function Cell(s,element,x,y,w,h){
 	this.element=element;
 	this.color=null;
+	this.sprite=null;
 	this.graphics;
 	this.rectangle={x:0,y:0,w:0,h:0};
 	this.rectangle.x=x;
@@ -40,4 +49,25 @@ Cell.prototype.setColor = function(element) {
 	this.graphics.beginFill(this.color);
 	this.graphics.lineStyle(2,0xFFFFFF);
 	this.graphics.drawRect(this.rectangle.x,this.rectangle.y,this.rectangle.w,this.rectangle.h);
+};
+
+Cell.prototype.setSprite = function(texture,w,h) {
+	this.sprite=new PIXI.extras.TilingSprite(texture);
+	this.sprite.scale.x=this.rectangle.w/w;
+	this.sprite.scale.y=this.rectangle.h/h;
+	this.sprite.width=w;
+	this.sprite.height=h;
+	this.sprite.x=this.rectangle.x;
+	this.sprite.y=this.rectangle.y;
+	var i=0;
+	if(this.element==0) i=0;
+	else if(this.element==1)i=1;
+	else if(this.element==2)i=2;
+	else if(this.element==3)i=3;
+
+	this.sprite.tilePosition.x=-w*i;
+	this.sprite.tilePosition.y=0;
+
+
+	
 };

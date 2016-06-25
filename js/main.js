@@ -6,11 +6,11 @@ var stage=new PIXI.Container();
 var graphics=new PIXI.Graphics();
 
 
-var side=25;
+var side=30;
 
 var field=[];
 
-
+var texture;
 
 
 
@@ -51,7 +51,9 @@ function createCleverField(x,y,earth,wood,water,mountain){
 		console.log(i);
 		if(field[i].element==-1){
 			field[i].element=0;
-			field[i].setColor(field[i].element);
+			//field[i].setColor(field[i].element);
+			field[i].setSprite(PIXI.loader.resources.tiles.texture,40,40);
+
 			count++;
 		}
 	}
@@ -61,7 +63,7 @@ function createCleverField(x,y,earth,wood,water,mountain){
 		var i = getRandomInt(0,field.length-1);
 		if(field[i].element==-1){
 			field[i].element=1;
-			field[i].setColor(field[i].element);
+			field[i].setSprite(PIXI.loader.resources.tiles.texture,40,40);
 			count++;
 		}
 	}
@@ -71,7 +73,7 @@ function createCleverField(x,y,earth,wood,water,mountain){
 		var i = getRandomInt(0,field.length-1);
 		if(field[i].element==-1){
 			field[i].element=2;
-			field[i].setColor(field[i].element);
+			field[i].setSprite(PIXI.loader.resources.tiles.texture,40,40);
 			count++;
 		}
 	}
@@ -81,14 +83,14 @@ function createCleverField(x,y,earth,wood,water,mountain){
 		var i = getRandomInt(0,field.length-1);
 		if(field[i].element==-1){
 			field[i].element=3;
-			field[i].setColor(field[i].element);
+			field[i].setSprite(PIXI.loader.resources.tiles.texture,40,40);
 			count++;
 		}
 	}
 	count=0;
 
 	for (var i = 0; i < field.length; i++) {
-			stage.addChild(field[i].getGraphics());
+			stage.addChild(field[i].sprite);
 			
 		};
 	
@@ -103,14 +105,52 @@ function render(){
 	
 }
 
-
-window.onload=function(){
-	//createField(20,20);
-	createCleverField(20,20,60,15,15,10);
-	render();
-}
-
 function getRandomInt(min, max)
 {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+
+function cellClick (x,y) {
+	var i=Math.floor(x/side);
+	var j=Math.floor(y/side);
+
+
+	console.log(i+" "+j);
+
+	
+	
+	if(i<Math.sqrt(field.length) && j<Math.sqrt(field.length) ){
+		console.log(el[field[20*i+j].element]);
+	}
+	
+}
+
+function click(e){
+	var offset=$("canvas").offset();
+	console.log((e.pageX-offset.left)+" "+(e.pageY-offset.top));
+	var x=e.pageX-offset.left;
+	var y=e.pageY-offset.top;
+
+	cellClick(x,y);
+}
+
+function loadContent(){
+	var loader=PIXI.loader;
+	loader.add('tiles',"assets/tiles.png");
+	loader.once('complete',function loaded () {
+		console.log("all loaded");
+		$("canvas").click(click);
+		//createField(20,20);
+		createCleverField(20,20,60,15,15,10);
+		
+		render();
+	});
+	loader.load();
+}
+
+window.onload=function(){
+	loadContent();
+	
+}
+
