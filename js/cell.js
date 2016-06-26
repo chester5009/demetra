@@ -17,7 +17,9 @@ function Cell(s,element,x,y,w,h){
 	this.rectangle.w=w;
 	this.rectangle.h=h;
 	this.stage=stage;
+	this.fetus=null;
 	this.init();
+
 	
 
 };
@@ -32,6 +34,7 @@ Cell.prototype.init = function() {
 	this.graphics.beginFill(this.color);
 	this.graphics.lineStyle(2,0xFFFFFF);
 	this.graphics.drawRect(this.rectangle.x,this.rectangle.y,this.rectangle.w,this.rectangle.h);
+	
 	
 };
 Cell.prototype.getGraphics = function() {
@@ -49,6 +52,7 @@ Cell.prototype.setColor = function(element) {
 	this.graphics.beginFill(this.color);
 	this.graphics.lineStyle(2,0xFFFFFF);
 	this.graphics.drawRect(this.rectangle.x,this.rectangle.y,this.rectangle.w,this.rectangle.h);
+	
 };
 
 Cell.prototype.setSprite = function(texture,w,h) {
@@ -70,4 +74,10 @@ Cell.prototype.setSprite = function(texture,w,h) {
 
 
 	
+};
+
+Cell.prototype.setFetus = function() {
+	var newfetus=new Fetus(this.element);
+	//console.log("THIs elem "+this.element);
+	this.fetus=newfetus;
 };

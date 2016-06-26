@@ -19,6 +19,7 @@ function createField(x,y){
 		for (var j = 0; j < x; j++) {
 			var element=getRandomInt(0,3);
 			var oneCell=new Cell(stage,element,i*side,j*side,side,side);
+			
 			field.push(oneCell);
 			stage.addChild(oneCell.getGraphics());
 			/*graphics.beginFill(0x00FF00);
@@ -48,7 +49,7 @@ function createCleverField(x,y,earth,wood,water,mountain){
 
 	while(count<e){
 		var i = getRandomInt(0,field.length-1);
-		console.log(i);
+		//console.log(i);
 		if(field[i].element==-1){
 			field[i].element=0;
 			//field[i].setColor(field[i].element);
@@ -90,6 +91,7 @@ function createCleverField(x,y,earth,wood,water,mountain){
 	count=0;
 
 	for (var i = 0; i < field.length; i++) {
+			field[i].setFetus();
 			stage.addChild(field[i].sprite);
 			
 		};
@@ -121,7 +123,7 @@ function cellClick (x,y) {
 	
 	
 	if(i<Math.sqrt(field.length) && j<Math.sqrt(field.length) ){
-		console.log(el[field[20*i+j].element]);
+		console.log(field[20*i+j].fetus.name);
 	}
 	
 }
@@ -148,6 +150,8 @@ function loadContent(){
 	});
 	loader.load();
 }
+
+
 
 window.onload=function(){
 	loadContent();
