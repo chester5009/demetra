@@ -17,81 +17,7 @@ var cols=20;
 
 
 
-function createCleverField(x,y,earth,wood,water,mountain){
-	var onePercent=x*y/100;
-	var e=earth*onePercent;
-	var w=wood*onePercent;
-	var wa=water*onePercent;
-	var m=mountain*onePercent;
-	for (var i = 0; i < x; i++) {
-		var arr=[];
-		for (var j = 0; j < y; j++) {
-			var oneCell=new Cell(stage,-1,i*side,j*side,side,side);
-			arr.push(oneCell);
-			//stage.addChild(oneCell.getGraphics());
-			
-		};
-		field.push(arr);
-	};
 
-	var count=0;
-
-	while(count<e){
-		var i = getRandomInt(0,x);
-		var j=	getRandomInt(0,y);
-		//console.log(i);
-		if(field[i][j].element==-1){
-			field[i][j].element=0;
-			//field[i].setColor(field[i].element);
-			field[i][j].setSprite(PIXI.loader.resources.tiles.texture,40,40);
-
-			count++;
-		}
-	}
-	count=0;
-
-	while(count<w){
-		var i = getRandomInt(0,y);
-		var j=	getRandomInt(0,x);
-		if(field[i][j].element==-1){
-			field[i][j].element=1;
-			field[i][j].setSprite(PIXI.loader.resources.tiles.texture,40,40);
-			count++;
-		}
-	}
-	count=0;
-
-	while(count<wa){
-		var i = getRandomInt(0,y);
-		var j=	getRandomInt(0,x);
-		if(field[i][j].element==-1){
-			field[i][j].element=2;
-			field[i][j].setSprite(PIXI.loader.resources.tiles.texture,40,40);
-			count++;
-		}
-	}
-	count=0;
-
-	while(count<m){
-		var i = getRandomInt(0,y);
-		var j=	getRandomInt(0,x);
-		if(field[i][j].element==-1){
-			field[i][j].element=3;
-			field[i][j].setSprite(PIXI.loader.resources.tiles.texture,40,40);
-			count++;
-		}
-	}
-	count=0;
-
-	for (var i = 0; i < x; i++) {
-			for(var j=0;j<y;j++){
-				field[i][j].setFetus();
-				stage.addChild(field[i][j].sprite);
-			}
-		};
-	
-
-}
 function getCountCells(){
 	var count=0;
 	for(var i=0;i<rows;i++){
@@ -197,7 +123,7 @@ function loadContent(){
 		console.log("all loaded");
 		$("canvas").click(click);
 		createField();
-		//createCleverField(20,20,60,15,15,10);
+		
 		
 		render();
 	});
