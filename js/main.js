@@ -65,10 +65,10 @@ function createField(){
 
 	}
 
-	addElements(0,60);
-	addElements(1,15);
-	addElements(2,15);
-	addElements(3,10);
+	addElements(0,80);
+	addElements(1,10);
+	addElements(2,5);
+	addElements(3,5);
 	console.log("generated");
 	for(var i=0;i<rows;i++){
 		for(var j=0;j<cols;j++){
@@ -97,13 +97,24 @@ function cellClick (x,y) {
 
 
 	console.log(i+" "+j);
+	
+	
+	
+		if(i<rows && j<cols ){ //устанавливаем новый фетус (трава начальная ё	пта)
+
+			var newFetus=getFetusForIndex(4);
+			if(field[i][j].fetus.index==newFetus.locate){
+				field[i][j].changeFetus(4);
+				console.log(field[i][j].fetus.name);
+			}else{
+				isUpgrade(i,j);
+			}
+		
+		}
+	
+	
 
 	
-	
-	if(i<rows && j<cols ){
-		field[i][j].setFetus(1);
-		console.log(field[i][j].fetus.name);
-	}
 	
 }
 
@@ -114,6 +125,66 @@ function click(e){
 	var y=e.pageY-offset.top;
 
 	cellClick(x,y);
+}
+
+function resetArrayCells(arr){  //обнуляет все ячейки переданные в массиве
+	for(var i=0;i<arr.length;i++){
+		field[arr[i].row][arr[i].col].resetCell();
+	}
+}
+
+function isUpgrade (row,col) {  //определяет соседей ячейки ,создает массив с их значениями ,нужными для апгрейда
+	var currFetus=field[row][col].fetus;
+	var needsCount;
+	var values=[];
+	var forReset=[];
+	var whatsWill;
+	var newFetusCoordinates={row:0,col:0};
+	for(var i=0;i<recipes.length;i++){
+		if(recipes[i].needs[0]==currFetus.index){
+			needsCount=recipes[i].needs[1];
+			whatsWill=recipes[i].needs[2];
+			console.log("needs "+needsCount);
+			break;
+		}
+	}
+	var dr,dc;
+	for(dr=-1;dr<2;dr++){//делает обход всех соседних ячеек ,собирает данные о них
+		for(dc=-1;dc<2;dc++){
+			try{
+				
+					if(field[row+dr][col+dc].fetus.index==field[row][col].fetus.index){
+						values.push(field[row+dr][col+dc].fetus.index);
+						if(dr==0 && dc==0){
+							newFetusCoordinates.row=row;
+							newFetusCoordinates.col=col;
+						}
+						else{
+							forReset.push({row:row+dr,col:col+dc});
+						}
+					}
+					
+				
+				
+			}
+			catch(err){
+				console.log("err - "+err);
+			}
+			
+		}
+	}
+	if(values.length>=needsCount){
+		resetArrayCells(forReset);
+		field[row][col].changeFetus(whatsWill);
+	}
+	
+	console.log(values);
+}
+function upgradeFetus(row,col){
+	var currFetus=field[row][col].fetus;
+	if(currFetus.index!=-1){
+
+	}
 }
 
 function loadContent(){

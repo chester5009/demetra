@@ -5,7 +5,14 @@ function Fetus(index) {
 }
 
 Fetus.prototype.init = function() {
-	var alterfetus = getFetusForIndex(this.index);
+	var alterfetus;
+	if(this.index==-1){
+		alterfetus={index:this.index,name:"пусто",locate:-1};
+	}
+	else{
+		alterfetus = getFetusForIndex(this.index);
+	}
+	
 	this.name=alterfetus.name;
 	
 };

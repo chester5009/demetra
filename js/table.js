@@ -1,5 +1,5 @@
 var table=[];
-
+var recipes=[];
 table.push({index:0,name:"земля",locate:-1});
 table.push({index:1,name:"лес",locate:-1});
 table.push({index:2,name:"вода",locate:-1});
@@ -7,7 +7,7 @@ table.push({index:3,name:"скалы",locate:-1});
 table.push({index:4,name:"зерновой колос",locate:0});
 table.push({index:5,name:"сноп пшеницы",locate:0});
 table.push({index:6,name:"мельница",locate:0});
-
+table.push({index:7,name:"вишня xD",locate:0});
 
 function getFetusForIndex(index){
 	
@@ -25,3 +25,8 @@ function getFetusForName(name){
 	}
 	
 }
+
+
+recipes.push({needs:[4,3,5]}); //зернового колоса(4) 3 штуки и поулчаем сноп пшеницы(5)
+recipes.push({needs:[5,4,6]});
+recipes.push({needs:[6,2,7]});

@@ -48,17 +48,28 @@ Cell.prototype.setSprite = function(texture,w,h) {
 
 Cell.prototype.changeFetus = function(newFetus) {
 	//this.element=newElement;
+
 	this.setFetus(newFetus);
-	i=this.fetus.index;
+	var i=this.fetus.index;
+	if (i==-1) i=this.element;
+	console.log("I "+i);
 	this.sprite.tilePosition.x=-this.sprite.width*i;
 	this.sprite.tilePosition.y=0;
 };
 
 Cell.prototype.setFetus = function(value) {
-	if(this.element>-1){
+	
 		var newfetus=new Fetus(value);
 		//console.log("THIs elem "+this.element);
 		this.fetus=newfetus;
-	}
 	
+	
+};
+Cell.prototype.resetCell = function() {
+	this.setFetus(this.element);
+	
+	var i=this.fetus.index;
+	console.log("I "+i);
+	this.sprite.tilePosition.x=-this.sprite.width*i;
+	this.sprite.tilePosition.y=0;
 };
