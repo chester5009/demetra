@@ -37,7 +37,7 @@ function getNumberOfCells(value) {
 	return count;
 }
 
-function addElements(number,percent) {
+function addElements(number,percent) { //добавляет на поле заданный элемент в процентном соотношении
 	var numberAll=getCountCells();
 	var numberPercent=numberAll/100*percent;
 	var i=0;
@@ -53,7 +53,7 @@ function addElements(number,percent) {
 	}
 }
 
-function createField(){
+function createField(){//создает поле с пустыми ячейками и генерирует ланшафт
 	field=[];
 	for(var i=0;i<rows;i++){
 		var a=[];
@@ -140,32 +140,25 @@ function isUpgrade (row,col) {  //определяет соседей ячейк
 	var forReset=[];
 	var whatsWill;
 	var newFetusCoordinates={row:0,col:0};
-	for(var i=0;i<recipes.length;i++){
+	/*for(var i=0;i<recipes.length;i++){
 		if(recipes[i].needs[0]==currFetus.index){
 			needsCount=recipes[i].needs[1];
 			whatsWill=recipes[i].needs[2];
 			console.log("needs "+needsCount);
 			break;
 		}
-	}
+	}*/
 	var dr,dc;
 	for(dr=-1;dr<2;dr++){//делает обход всех соседних ячеек ,собирает данные о них
 		for(dc=-1;dc<2;dc++){
 			try{
-				
-					if(field[row+dr][col+dc].fetus.index==field[row][col].fetus.index){
-						values.push(field[row+dr][col+dc].fetus.index);
-						if(dr==0 && dc==0){
-							newFetusCoordinates.row=row;
-							newFetusCoordinates.col=col;
-						}
-						else{
-							forReset.push({row:row+dr,col:col+dc});
-						}
-					}
-					
-				
-				
+		
+					values.push(field[row+dr][col+dc].fetus.index);
+						
+					/*else{
+						forReset.push({row:row+dr,col:col+dc});
+					}*/
+	
 			}
 			catch(err){
 				console.log("err - "+err);
@@ -173,10 +166,13 @@ function isUpgrade (row,col) {  //определяет соседей ячейк
 			
 		}
 	}
-	if(values.length>=needsCount){
+	//
+	//Тут поставить проверку на то что соседние ячейки вместе с нажатой составляют комбинацию
+	//
+	/*if(values.length>=needsCount){
 		resetArrayCells(forReset);
 		field[row][col].changeFetus(whatsWill);
-	}
+	}*/
 	
 	console.log(values);
 }

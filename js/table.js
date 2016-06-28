@@ -27,6 +27,8 @@ function getFetusForName(name){
 }
 
 
-recipes.push({needs:[4,3,5]}); //зернового колоса(4) 3 штуки и поулчаем сноп пшеницы(5)
-recipes.push({needs:[5,4,6]});
-recipes.push({needs:[6,2,7]});
+recipes.push({input:[4],howmany:[3],output:5}); //зернового колоса(4) 3 штуки и поулчаем сноп пшеницы(5)
+recipes.push({input:[5],howmany:[4],output:6}); 
+recipes.push({input:[6],howmany:[2],output:7}); 
+//recipes.push({needs:[5,4,6]});
+//recipes.push({needs:[6,2,7]});
